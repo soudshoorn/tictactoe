@@ -21,7 +21,17 @@ for(let i = 0; i < fields.length; i++) {
 }
 
 function handlePlayerChange() {
+    // Als het statement waar is wordt het O zoniet dan X
     currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+    // if(currentPlayer === "X"){
+    //     currentPlayer = "O";
+    // }
+    // else if(currentPlayer === "O"){
+    //     currentPlayer = "X";
+    // }else {
+    //     currentPlayer = "Y";
+    // }
 
     statusDisplay.innerHTML = currentPlayerTurn();
 }
