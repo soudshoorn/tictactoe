@@ -7,24 +7,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <section>
-        <h1 class="game--title">Tic Tac Toe</h1>
-        <div class="game--container">
-            <div data-cell-index="0" class="cell"></div>
-            <div data-cell-index="1" class="cell"></div>
-            <div data-cell-index="2" class="cell"></div>
-            <div data-cell-index="3" class="cell"></div>
-            <div data-cell-index="4" class="cell"></div>
-            <div data-cell-index="5" class="cell"></div>
-            <div data-cell-index="6" class="cell"></div>
-            <div data-cell-index="7" class="cell"></div>
-            <div data-cell-index="8" class="cell"></div>
+    <main>
+        <div class="table">
+            <h1 class="game-title">Tic Tac Toe</h1>
+            <div class="column">
+                <div class="board">
+                    <div class="field field-light"></div>
+                    <div class="field field-dark"></div>
+                    <div class="field field-light"></div>
+                    <div class="field field-dark"></div>
+                    <div class="field field-light"></div>
+                    <div class="field field-dark"></div>
+                    <div class="field field-light"></div>
+                    <div class="field field-dark"></div>
+                    <div class="field field-light"></div>
+                </div>
+            </div>
+            <p class="game-status"></p>
+            <button class="reset-button">Reset Game</button>
         </div>
-        <h2 class="game--status"></h2>
-        <button class="game--restart">Restart Game</button>
-    </section>
+      </main>
 <script src="js/script.js"></script>
 </body>
 </html>

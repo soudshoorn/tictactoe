@@ -20,3 +20,59 @@ section {
 line-height: 100px;
     font-size: 60px;
 }
+
+
+
+html, body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  header {
+    margin-left: -30px;
+  }
+  
+  /* Add correct CSS here for a grid overview */
+  
+  .column {
+    float: left;
+  }
+  
+  .board {
+      width: 300px;
+      height: 300px;
+      margin: 300 auto;
+    background-color: #34495e;
+    color: #fff;
+    border: 6px solid #2c3e50;
+    border-radius: 10px;
+      display: grid;
+      grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  }
+  
+  .field {
+    border: 2px solid #2c3e50;
+    border-radius: 2px;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .field-dark {
+    background-color: #34495e;
+    color: bisque;
+  }
+  
+  .field-light {
+    background-color: bisque;
+    color: #34495e;
+  }
+  
+  
