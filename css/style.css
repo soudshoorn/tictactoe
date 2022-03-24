@@ -21,7 +21,19 @@ line-height: 100px;
     font-size: 60px;
 }
 
+.game-status{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
+.reset-button{
+  background-color: bisque;
+  border: #34495e solid 5px;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color:#34495e
+}
 
 html, body {
     width: 100%;
