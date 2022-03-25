@@ -36,7 +36,7 @@ for(let i = 0; i < fields.length; i++) {
 
     // Click listener die het veld doorgeeft waar op is geklikt
     field.addEventListener('click', function() {
-        handleCellClick(field, i);
+        handleCellClick(field, i,);
     })
 }
 function handleCellPlayed(i) {
@@ -96,6 +96,7 @@ function handleCellClick(field, i) {
     }
     // Veranderd het geklikte veld in die van de speler
     field.innerHTML = currentPlayer;
+<<<<<<< Updated upstream
     handleCellPlayed(i);
     handleResultValidation();
 }
@@ -108,4 +109,12 @@ function handleRestartGame() {
     }
     // Reset de status van het potje
     gameActive = true;
+=======
+
+    handlePlayerChange()
+}
+function handleRestartGame() {
+    fields.textContent = '';
+    console.log('test');
+>>>>>>> Stashed changes
 }
