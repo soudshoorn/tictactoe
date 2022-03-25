@@ -90,15 +90,36 @@ function handleResultValidation() {
     // Als we tot hier komen weten we dat er nog zetten zijn om gedaan te worden
     handlePlayerChange();
 }
+function handleComputerMove() {
+    const emptyFields = [];
+    let randomField;
+
+    if (!gameActive || !gameState.includes("")) {
+        return;
+    }
+
+    fields.forEach(function(cell){
+        if (cell.textContent == '') {
+          emptyFields.push(cell);
+        }
+    });
+
+      randomField = Math.ceil(Math.random() * emptyFields.length -1);
+      emptyFields[randomField].innerHTML = currentPlayer;
+      handleCellPlayed(randomField);
+      handleResultValidation();
+      console.log(gameState);
+      console.log('emptyFields Lengte: ' + emptyFields.length + ', randomField nummer: ' + randomField);
+}
 function handleCellClick(field, i) {
     if (gameState[i] !== "" || !gameActive) {
         return;
     }
     // Veranderd het geklikte veld in die van de speler
     field.innerHTML = currentPlayer;
-<<<<<<< Updated upstream
     handleCellPlayed(i);
     handleResultValidation();
+    handleComputerMove(i);
 }
 function handleRestartGame() {
     for(let i = 0; i < fields.length; i++) {
@@ -109,12 +130,8 @@ function handleRestartGame() {
     }
     // Reset de status van het potje
     gameActive = true;
-=======
-
-    handlePlayerChange()
+    statusDisplay.innerHTML = currentPlayerTurn();
 }
-function handleRestartGame() {
-    fields.textContent = '';
-    console.log('test');
->>>>>>> Stashed changes
+function debug() {
+    console.log('gameState Array: ' + gameState + ', emptyFields Lengte: ' + this.emptyFields + ', randomField nummer: ' + this.randomField);
 }
