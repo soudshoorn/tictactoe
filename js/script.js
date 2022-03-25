@@ -98,18 +98,16 @@ function handleComputerMove() {
         return;
     }
 
-    fields.forEach(function(cell){
-        if (cell.textContent == '') {
-          emptyFields.push(cell);
+    fields.forEach(function(cell, i){
+        if (cell.innerHTML == '') {
+          emptyFields.push(i);
         }
     });
-
-      randomField = Math.ceil(Math.random() * emptyFields.length -1);
-      emptyFields[randomField].innerHTML = currentPlayer;
-      handleCellPlayed(randomField);
-      handleResultValidation();
-      console.log(gameState);
-      console.log('emptyFields Lengte: ' + emptyFields.length + ', randomField nummer: ' + randomField);
+    
+    randomField = emptyFields[Math.floor(Math.random() * emptyFields.length)];
+    fields[randomField].innerHTML = currentPlayer;
+    handleCellPlayed(randomField);
+    handleResultValidation();
 }
 function handleCellClick(field, i) {
     if (gameState[i] !== "" || !gameActive) {
@@ -133,5 +131,5 @@ function handleRestartGame() {
     statusDisplay.innerHTML = currentPlayerTurn();
 }
 function debug() {
-    console.log('gameState Array: ' + gameState + ', emptyFields Lengte: ' + this.emptyFields + ', randomField nummer: ' + this.randomField);
+    console.log(gameState);
 }
