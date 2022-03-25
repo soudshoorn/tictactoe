@@ -7,7 +7,7 @@ let gameActive = true;
 let currentPlayer = "X";
 // Om de gezette zetten op te slaan
 let gameState = ["", "", "", "", "", "", "", "", ""];
-// De winnende condities
+// De winnende condities (Elke array lijstje hierin staat voor een winnende conditie)
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -49,11 +49,8 @@ function handlePlayerChange() {
 
     // if(currentPlayer === "X"){
     //     currentPlayer = "O";
-    // }
-    // else if(currentPlayer === "O"){
+    // } else {
     //     currentPlayer = "X";
-    // }else {
-    //     currentPlayer = "Y";
     // }
 
     statusDisplay.innerHTML = currentPlayerTurn();
@@ -72,6 +69,7 @@ function handleResultValidation() {
             continue;
         }
         if (a === b && b === c) {
+            console.log(a + b + c);
             roundWon = true;
             break
         }
@@ -104,9 +102,10 @@ function handleCellClick(field, i) {
 function handleRestartGame() {
     for(let i = 0; i < fields.length; i++) {
         const field = fields[i];
-    
-        gameState[i] = '';
-        field.innerHTML = '';
+
+        gameState[i] = ''; // Reset de array zodat er geen gevulde vakjes meer zijn
+        field.innerHTML = ''; // Haal de geplaatste plekken weg
     }
-    console.log('test');
+    // Reset de status van het potje
+    gameActive = true;
 }
