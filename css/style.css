@@ -31,6 +31,10 @@ section {
   font-size: 60px;
 }
 
+.far,.fas{
+  color: #f8d320;
+}
+
 .game-title{
   color: white;
   font-family: Verdana, sans-serif;
@@ -40,6 +44,8 @@ section {
 }
 
 .game-score{
+  margin-top: 2rem;
+  font-size: 1.75rem;
   color: white;
   font-family: Verdana, sans-serif;
   font-weight: bold;
@@ -88,7 +94,7 @@ span{
   font-weight: 800;
   color: #212845;
   cursor: pointer;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
@@ -128,7 +134,7 @@ header {
 .column {
   float: left;
 }
-  
+
 .board {
   width: 400px;
   height: 400px;
@@ -136,7 +142,7 @@ header {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
-  
+
 .field {
   border-radius: 2px;
   font-family: Helvetica;

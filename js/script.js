@@ -56,8 +56,9 @@ personModeButton.addEventListener('click', function() {
 
 // Wanneer er word gekozen voor de personen modes, zet dan de variabele op false en laat het spel zien
 pickModeButton.addEventListener('click', function() {
-    let scorePlayerX = 0;
-    let scorePlayerO = 0;
+    scorePlayerX = 0;
+    scorePlayerO = 0;
+    handleUpdateScore();
 
     chooseGame.classList.remove('hidden');
     resetButton.classList.add('hidden');
@@ -79,9 +80,8 @@ const currentPlayerTurn = () => `${currentPlayer} is aan de beurt`;
 // Laat de status van het potje zien
 statusDisplay.innerHTML = currentPlayerTurn();
 
-gameScore.innerHTML = `Speler X: ${scorePlayerX} | Speler O: ${scorePlayerO}`;
-
 handleRestartGame(); // Start altijd met een leeg speelveld
+handleUpdateScore();
 
 for(let i = 0; i < fields.length; i++) {
     const field = fields[i];
@@ -90,6 +90,9 @@ for(let i = 0; i < fields.length; i++) {
     field.addEventListener('click', function() {
         handleCellClick(field, i,);
     })
+}
+function handleUpdateScore() {
+    gameScore.innerHTML = `<i class="fas fa-times"></i> ${scorePlayerX} - ${scorePlayerO} <i class="far fa-circle"></i>`;
 }
 function handleCellPlayed(i) {
     gameState[i] = currentPlayer; // Zet in de array op het geklikte veld de naam van de speler die er op heeft geklikt
@@ -128,10 +131,10 @@ function handleResultValidation() {
 
         if (currentPlayer == 'O'){
             scorePlayerO = scorePlayerO + 1;
-            gameScore.innerHTML = `Speler X: ${scorePlayerX} | Speler O: ${scorePlayerO}`;
+            handleUpdateScore();
         } else {
             scorePlayerX = scorePlayerX + 1;
-            gameScore.innerHTML = `Speler X: ${scorePlayerX} | Speler O: ${scorePlayerO}`;
+            handleUpdateScore();
         }
 
         return;
@@ -190,7 +193,6 @@ function handleCellClick(field, i) {
         return;
     }
 }
-
 function handleRestartGame() {
     // Ga door alle velden heen en maak per veld een variable
     for(let i = 0; i < fields.length; i++) {
