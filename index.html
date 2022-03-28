@@ -13,25 +13,33 @@
 </head>
 <body>
     <main>
-        <div class="table">
-            <h1 class="game-title">Tic Tac Toe</h1>
+        <div class="choose-game">
+            <h2 class="qMode">Waar wilt u tegen spelen?</h2>
+            <div class="mode-button">
+                <button class="computer">Computer</button>
+                <button class="person">Persoon</button>
+            </div>
+        </div>
+        <div class="table hidden">
+            <h1 class="game-title">Tic <span>Tac</span> Toe</h1>
+            <p class="game-status"></p>
             <div class="column">
                 <div class="board">
                     <div class="field field-light"></div>
-                    <div class="field field-dark"></div>
+                    <div class="field field-dark field-2"></div>
                     <div class="field field-light"></div>
-                    <div class="field field-dark"></div>
+                    <div class="field field-dark field-4"></div>
+                    <div class="field field-light field-5"></div>
+                    <div class="field field-dark field-6"></div>
                     <div class="field field-light"></div>
-                    <div class="field field-dark"></div>
-                    <div class="field field-light"></div>
-                    <div class="field field-dark"></div>
+                    <div class="field field-dark field-8"></div>
                     <div class="field field-light"></div>
                 </div>
             </div>
-            <p class="game-status"></p>
-            <button class="reset-button">Reset Game</button>
-            <button onclick="debug()" class="debug-button">debug array</button>
         </div>
+        <p class="game-score hidden"></p>
+        <button class="reset-button hidden">Herstarten</button>
+        <div><button class="pick-mode-button hidden">Kies andere modus</button></div>
       </main>
 <script src="js/script.js"></script>
 </body>
