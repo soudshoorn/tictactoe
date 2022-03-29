@@ -3,15 +3,24 @@ const fields = document.querySelectorAll('.board > .field'); // Haal alle elemen
 const table = document.querySelector('.table'); // Haal de tabel op waar alles in zit van het spel
 
 const chooseGame = document.querySelector('.choose-game'); // Haal de kies ene game modes div op
+const maxScoreWrapper = document.querySelector('.choose-maxscore'); // Haalt de parent div van maxcore op
+const scoreWinnerMessage = document.querySelector('.maxscore-winner') // Haal het win bericht op
+const maxScoreWinner = document.querySelector('.final-winner'); // Haalt de winner div op
+const finalScore = document.querySelector('.final-score'); // Haalt de uiteindelijke score op
 const pickModeButton = document.querySelector('.pick-mode-button'); // Haal de kies nieuwe modus button op
 const computerModeButton = document.querySelector('.computer'); // Haal de computer modes button op
 const personModeButton = document.querySelector('.person'); // Haal de persoon modes button op
+const playAgainButton = document.querySelector('.playagain-button'); // Haal de speel opnieuw button op
+const maxScoreButton = document.querySelectorAll('.maxscore-buttons'); // Haalt alle max score buttons op
 const gameScore = document.querySelector('.game-score'); // Haal de persoon modes button op
+
 
 // Scores
 let scorePlayerX = 0;
 let scorePlayerO = 0;
 
+// Winnaar is degene die deze maxscore behaalt!
+let maxScore = 0;
 // Kijk of persoon wilt spelen tegen iemand of tegen de computer
 let computerMode = true;
 // Gebruiken we om de game te pauzeren wanneer hij tot een einde is gekomen
@@ -25,9 +34,11 @@ const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
+
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
+
     [0, 4, 8],
     [2, 4, 6]
 ];
@@ -37,10 +48,7 @@ computerModeButton.addEventListener('click', function() {
     computerMode = true;
 
     chooseGame.classList.add('hidden');
-    resetButton.classList.remove('hidden');
-    table.classList.remove('hidden');
-    pickModeButton.classList.remove('hidden');
-    gameScore.classList.remove('hidden');
+    maxScoreWrapper.classList.remove('hidden');
 })
 
 // Wanneer er word gekozen voor de personen modes, zet dan de variabele op false en laat het spel zien
@@ -48,11 +56,37 @@ personModeButton.addEventListener('click', function() {
     computerMode = false;
 
     chooseGame.classList.add('hidden');
-    resetButton.classList.remove('hidden');
-    table.classList.remove('hidden');
-    pickModeButton.classList.remove('hidden');
-    gameScore.classList.remove('hidden');
+    maxScoreWrapper.classList.remove('hidden');
 })
+
+playAgainButton.addEventListener('click', function() {
+    chooseGame.classList.remove('hidden');
+    maxScoreWinner.classList.add('hidden');
+    handleRestartGame();
+    scorePlayerX = 0;
+    scorePlayerO = 0;
+    handleUpdateScore();
+})
+
+// Kijk op welke knop voor de maxscore er is geklikt
+for (let i = 0; i < maxScoreButton.length; i++) {
+    let clickedScore = maxScoreButton[i];
+    clickedScore.addEventListener("click", function() {
+        if(clickedScore.textContent == '3'){
+            maxScore = 3;
+        } else if (clickedScore.textContent == '5'){
+            maxScore = 5;
+        } else {
+            maxScore = 10;
+        }
+        maxScoreWrapper.classList.add('hidden');
+        resetButton.classList.remove('hidden');
+        table.classList.remove('hidden');
+        pickModeButton.classList.remove('hidden');
+        gameScore.classList.remove('hidden');
+    });
+    
+}
 
 // Wanneer er word gekozen voor de personen modes, zet dan de variabele op false en laat het spel zien
 pickModeButton.addEventListener('click', function() {
@@ -81,7 +115,7 @@ const currentPlayerTurn = () => `${currentPlayer} is aan de beurt`;
 statusDisplay.innerHTML = currentPlayerTurn();
 
 handleRestartGame(); // Start altijd met een leeg speelveld
-handleUpdateScore();
+handleUpdateScore(); // Update altijd de score bij een nieuwe game
 
 for(let i = 0; i < fields.length; i++) {
     const field = fields[i];
@@ -92,6 +126,7 @@ for(let i = 0; i < fields.length; i++) {
     })
 }
 function handleUpdateScore() {
+    // De HTML voor de score
     gameScore.innerHTML = `<i class="fas fa-times"></i> ${scorePlayerX} - ${scorePlayerO} <i class="far fa-circle"></i>`;
 }
 function handleCellPlayed(i) {
@@ -120,8 +155,6 @@ function handleResultValidation() {
             roundWon = true;
             break
         }
-
-        let gameWinner = a + b + c;
     }
 
     // Wanneer de ronde is gewonnen toon de winning message en zet de game op pauze
@@ -129,12 +162,18 @@ function handleResultValidation() {
         statusDisplay.innerHTML = winningMessage();
         gameActive = false;
 
+        // Kijk wie er heeft gewonnen en geef hem +1 score
         if (currentPlayer == 'O'){
             scorePlayerO = scorePlayerO + 1;
             handleUpdateScore();
         } else {
             scorePlayerX = scorePlayerX + 1;
             handleUpdateScore();
+        }
+
+        // Controleer of iemand die maxscore die is gekozen heeft bereikt
+        if (scorePlayerO == maxScore || scorePlayerX == maxScore){
+            handleMaxScoreWinner();
         }
 
         return;
@@ -200,6 +239,7 @@ function handleRestartGame() {
 
         gameState[i] = ''; // Reset de array zodat er geen gevulde vakjes meer zijn
         field.innerHTML = ''; // Haal de geplaatste plekken weg
+        currentPlayer = 'X';
     }
 
     // Reset de status van het potje
@@ -209,6 +249,23 @@ function handleRestartGame() {
 }
 function handleComputerMode(){
     computerMode = true;
+}
+function handleMaxScoreWinner(){
+    maxScoreWinner.classList.remove('hidden');
+    playAgainButton.classList.remove('hidden');
+    chooseGame.classList.add('hidden');
+    resetButton.classList.add('hidden');
+    table.classList.add('hidden');
+    pickModeButton.classList.add('hidden');
+    gameScore.classList.add('hidden');
+
+    if (currentPlayer == 'X'){
+        scoreWinnerMessage.innerHTML = `Gefeliciteerd. speler <i class="fas fa-times winnericon"></i> heeft gewonnen!`;
+    } else {
+        scoreWinnerMessage.innerHTML = `Gefeliciteerd. speler <i class="far fa-circle winnericon"></i> heeft gewonnen!`;
+    }
+    finalScore.innerHTML = `<i class="fas fa-times"></i> ${scorePlayerX} - ${scorePlayerO} <i class="far fa-circle"></i>`;
+
 }
 function debug() {
     console.log(gameState); // Log de array met gekozen velden

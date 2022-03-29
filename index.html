@@ -14,11 +14,28 @@
 <body>
     <main>
         <div class="choose-game">
-            <h2 class="qMode">Waar wilt u tegen spelen?</h2>
+            <h2 class="mode-question">Waar wilt u tegen spelen?</h2>
             <div class="mode-button">
                 <button class="computer">Computer</button>
                 <button class="person">Persoon</button>
             </div>
+        </div>
+        <div class="choose-maxscore hidden">
+            <h2 class="maxscore-question">Tot de hoeveel wil je spelen?</h2>
+            <div class="maxscore-button">
+                <button class="maxscore-3 maxscore-buttons">3</button>
+                <button class="maxscore-5 maxscore-buttons">5</button>
+                <button class="maxscore-10 maxscore-buttons">10</button>
+            </div>
+        </div>
+        <div class="final-winner hidden">
+            <h2 class="maxscore-winner"></h2>
+            <p class="finalscore-title">Uiteindelijke Score:</p>
+            <h3 class="final-score"></h3>
+            <div class="maxscore-cake">
+                <i class="fas fa-birthday-cake winnercake"></i>
+            </div>
+            <div><button class="playagain-button hidden">Opnieuw Spelen</button></div>
         </div>
         <div class="table hidden">
             <h1 class="game-title">Tic <span>Tac</span> Toe</h1>
